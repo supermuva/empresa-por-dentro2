@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A empresa por dentro · Empregabilidade em Foco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --cream:#E9E6DA; --cream2:#F3F1E9; --card:#FBFAF4;
+    --green:#1A5E50; --green-d:#123F38; --green-dd:#0E322C;
+    --ink:#283329; --muted:#5C6657;
+    --teal:#2C7F70; --teal-ink:#FFFFFF;
+    --sage:#9DBE86; --sage-bg:#E7F0DC; --sage-ink:#2B4A32;
+    --orange:#E8824E; --orange-d:#D06A38;
+    --sky:#8FC7D6; --leaf:#B9CE7E;
+    --line:#D8D4C4;
+    --shadow:0 10px 30px rgba(18,63,56,.14);
+    --radius:18px;
+    --fs:'Raleway', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --cream:#14201C; --cream2:#1A2823; --card:#1E2E28;
+      --green:#8FD8C6; --green-d:#BfeadF; --green-dd:#E6F4EF;
+      --ink:#E8F0EA; --muted:#A7B7AC;
+      --teal:#43A892; --teal-ink:#06231D;
+      --sage:#A9CC90; --sage-bg:#273A2A; --sage-ink:#D7ECC9;
+      --orange:#F0935F; --orange-d:#F0935F;
+      --line:#2C4038; --shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
+  :root{box-sizing:border-box}
+  body{
+    margin:0; font-family:var(--fs); color:var(--ink);
+    background:var(--cream);
+    padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:28px 22px 60px}
+
+  /* header */
+  header{position:relative; overflow:hidden; border-radius:24px;
+    background:linear-gradient(180deg,var(--cream2),var(--cream));
+    border:1px solid var(--line); padding:30px 30px 26px; margin-bottom:26px}
+  .deco{position:absolute; inset:0; pointer-events:none; opacity:.9}
+  .eyebrow{font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--orange); font-size:clamp(11px,1.4vw,13px); margin:0 0 8px}
+  h1{font-weight:800; color:var(--green); line-height:1.04;
+    font-size:clamp(28px,4.6vw,46px); margin:0 0 10px; max-width:16ch}
+  .lead{font-size:clamp(14px,1.7vw,17px); color:var(--muted); font-weight:500;
+    margin:0 0 18px; max-width:60ch}
+  .meta{display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center}
+  .stat{display:flex; align-items:baseline; gap:7px; color:var(--green-d); font-weight:800}
+  .stat b{font-size:clamp(20px,3vw,28px)}
+  .stat span{font-size:13px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+  .legend{display:flex; gap:16px; flex-wrap:wrap; margin-left:auto; align-items:center}
+  .legk{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--ink)}
+  .dot{width:13px; height:13px; border-radius:50%}
+  .dot.h{background:var(--teal)} .dot.s{background:var(--sage)}
+
+  /* tiers */
+  .tier{margin:30px 0 8px}
+  .tier-h{display:flex; align-items:center; gap:12px; margin:0 0 14px}
+  .tier-h .bar{width:28px; height:5px; border-radius:3px}
+  .tier-h h2{font-size:clamp(15px,2vw,18px); font-weight:800; color:var(--green-d);
+    letter-spacing:.02em; margin:0}
+  .tier-h p{margin:0; font-size:13px; color:var(--muted); font-weight:500}
+  .tier.gestao .bar{background:var(--green-d)}
+  .tier.tecnica .bar{background:var(--teal)}
+  .tier.apoio .bar{background:var(--orange)}
+
+  .grid{display:grid; gap:14px;
+    grid-template-columns:repeat(auto-fill,minmax(235px,1fr))}
+  .grid.one{grid-template-columns:minmax(260px,420px)}
+
+  /* tile */
+  .tile{display:flex; align-items:center; gap:14px; text-align:left; cursor:pointer;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:16px 16px; font-family:var(--fs); color:var(--ink);
+    transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease; width:100%}
+  .tile:hover,.tile:focus-visible{transform:translateY(-3px); box-shadow:var(--shadow);
+    border-color:transparent; outline:none}
+  .tile:focus-visible{box-shadow:0 0 0 3px var(--orange), var(--shadow)}
+  .chip{width:46px; height:46px; border-radius:13px; flex:0 0 auto;
+    display:grid; place-items:center; color:#fff}
+  .chip svg{width:26px; height:26px; stroke:#fff; stroke-width:1.9; fill:none;
+    stroke-linecap:round; stroke-linejoin:round}
+  .gestao .chip{background:var(--green-d)}
+  .tecnica .chip{background:var(--teal)}
+  .apoio .chip{background:var(--orange)}
+  .tile .tt{display:flex; flex-direction:column; gap:3px; min-width:0}
+  .tile .nm{font-weight:800; color:var(--green-d); font-size:15px; line-height:1.12}
+  .tile .ct{font-size:12px; color:var(--muted); font-weight:600;
+    display:flex; align-items:center; gap:6px}
+  .tile .ct .arrow{color:var(--orange); font-weight:800; transition:transform .14s}
+  .tile:hover .ct .arrow{transform:translateX(3px)}
+
+  /* modal */
+  .ov{position:fixed; inset:0; background:rgba(14,31,27,.55); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; padding:20px; z-index:50}
+  .ov.open{display:flex}
+  .modal{background:var(--card); border-radius:22px; width:min(680px,100%);
+    max-height:min(88vh,860px); overflow:auto; box-shadow:0 30px 70px rgba(0,0,0,.4);
+    transform:translateY(8px); animation:pop .18s ease forwards}
+  @keyframes pop{to{transform:translateY(0)}}
+  .mhead{position:sticky; top:0; display:flex; align-items:center; gap:16px;
+    padding:22px 24px; color:#fff}
+  .mhead .chip{width:50px; height:50px}
+  .mhead .chip svg{width:28px;height:28px}
+  .mhead.gestao{background:var(--green-d)} .mhead.tecnica{background:var(--teal)}
+  .mhead.apoio{background:var(--orange)}
+  .mhead .mt{display:flex; flex-direction:column; gap:3px}
+  .mhead .mt .k{font-size:11.5px; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; opacity:.82}
+  .mhead .mt h3{margin:0; font-size:clamp(18px,3vw,23px); font-weight:800; line-height:1.08}
+  .mclose{margin-left:auto; background:rgba(255,255,255,.18); border:0; color:#fff;
+    width:38px; height:38px; border-radius:50%; font-size:22px; cursor:pointer; line-height:1;
+    flex:0 0 auto; transition:background .14s}
+  .mclose:hover{background:rgba(255,255,255,.32)}
+  .mbody{padding:10px 24px 26px}
+  .role{padding:18px 0; border-bottom:1px solid var(--line)}
+  .role:last-child{border-bottom:0}
+  .role .rn{display:flex; align-items:center; gap:9px; font-weight:800; color:var(--green-d);
+    font-size:17px; margin:0 0 12px}
+  .role .rn::before{content:""; width:9px; height:9px; border-radius:50%; background:var(--orange); flex:0 0 auto}
+  .skset{display:flex; flex-direction:column; gap:9px}
+  .skrow{display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap}
+  .sklab{font-size:10.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+    padding:4px 9px; border-radius:7px; flex:0 0 auto; margin-top:2px}
+  .sklab.h{background:var(--teal); color:var(--teal-ink)}
+  .sklab.s{background:var(--sage); color:var(--sage-ink)}
+  .chips{display:flex; gap:7px; flex-wrap:wrap}
+  .sk{font-size:13.5px; font-weight:600; padding:5px 11px; border-radius:20px; line-height:1.1}
+  .sk.h{background:#E3F0EC; color:#1C5A4D; border:1px solid #BfddD4}
+  .sk.s{background:var(--sage-bg); color:var(--sage-ink); border:1px solid #CDE0BC}
+
+  /* footer */
+  footer{margin-top:40px; padding-top:20px; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;
+    font-size:12.5px; color:var(--muted); font-weight:600}
+  footer .b{color:var(--green-d); font-weight:800}
+  .hint{display:inline-flex; align-items:center; gap:7px; color:var(--orange-d); font-weight:700}
+
+  @media (max-width:560px){
+    .wrap{padding:16px 14px 48px}
+    header{padding:22px 18px}
+    .legend{margin-left:0; width:100%}
+    .grid,.grid.one{grid-template-columns:1fr}
+    .mhead{padding:18px}
+    .mbody{padding:8px 18px 22px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="deco" viewBox="0 0 1180 230" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+      <g transform="translate(1000,0)" opacity=".85">
+        <rect x="120" y="0" width="60" height="230" fill="#2C7F70" opacity=".16"/>
+        <circle cx="150" cy="40" r="34" fill="#8FC7D6" opacity=".5"/>
+        <path d="M70 0a60 60 0 0 1 60 60H70z" fill="#B9CE7E" opacity=".55"/>
+        <path d="M150 150a40 40 0 0 1-40 40v-40z" fill="#1A5E50" opacity=".5"/>
+        <circle cx="60" cy="150" r="22" fill="#E8824E" opacity=".4"/>
+        <rect x="95" y="95" width="34" height="34" rx="6" fill="#2C7F70" opacity=".35"/>
+      </g>
+    </svg>
+    <p class="eyebrow">Empregabilidade em Foco · IFRN</p>
+    <h1>A empresa por dentro</h1>
+    <p class="lead">Áreas, profissões e habilidades de uma empresa de energia solar.
+      Clique em cada área para ver quem trabalha nela e as competências que o trabalho exige.</p>
+    <div class="meta">
+      <div class="stat"><b>11</b><span>áreas</span></div>
+      <div class="stat"><b>15</b><span>profissões</span></div>
+      <div class="legend">
+        <span class="legk"><span class="dot h"></span> Hard skills — técnicas</span>
+        <span class="legk"><span class="dot s"></span> Soft skills — socioemocionais</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="tiers"></main>
+
+  <footer>
+    <span class="b">Empregabilidade em Foco · IFRN</span>
+    <span>Profissionais do Futuro · GIZ · MUVA · Energife</span>
+    <span class="hint" style="margin-left:auto">👆 Clique em uma área para explorar</span>
+  </footer>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mttl" tabindex="-1">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+const ICON = {
+  briefcase:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7"/><path d="M3 12.5h18"/>',
+  ruler:'<path d="M15.5 3.2l5.3 5.3L8.5 20.8l-5.3-5.3z"/><path d="M8 7.5l2 2M11 10.5l2 2M14 13.5l2 2"/>',
+  helmet:'<path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M2.5 17h19v1.5a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0v3h-5z"/>',
+  wrench:'<path d="M15 6.5a4 4 0 0 0-5.3 5.1L3.5 17.9 6 20.4l6.4-6.2a4 4 0 0 0 5.1-5.3L15 11.3l-2.3-.5-.5-2.3z"/>',
+  monitor:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M6.5 10.5l2.3-3 2 4.2 1.8-2.3 1.2 1.4h3.2"/><path d="M9 20h6M12 16v4"/>',
+  speech:'<path d="M20.5 11.5a7.5 7.5 0 0 1-10.8 6.8L4 19.8l1.2-4.6A7.5 7.5 0 1 1 20.5 11.5z"/><path d="M8.5 11.5h7M8.5 8.8h7"/>',
+  shield:'<path d="M12 3l7 2.6v5.2c0 4.3-3 7.2-7 8.7-4-1.5-7-4.4-7-8.7V5.6z"/><path d="M8.8 11.8l2.2 2.2 4.2-4.3"/>',
+  boxes:'<rect x="2.5" y="9.5" width="8.5" height="8" rx="1.2"/><rect x="13" y="9.5" width="8.5" height="8" rx="1.2"/><rect x="7.8" y="2.8" width="8.5" height="6.2" rx="1.2"/>',
+  coins:'<ellipse cx="12" cy="6.8" rx="7" ry="3"/><path d="M5 6.8v4.8c0 1.6 3.1 2.9 7 2.9s7-1.3 7-2.9V6.8"/><path d="M5 11.6v4.8c0 1.6 3.1 2.9 7 2.9s7-1.3 7-2.9v-4.8"/>',
+  users:'<circle cx="9" cy="8" r="3.1"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16.5 5.2a3.1 3.1 0 0 1 0 6"/><path d="M18.5 20a6 6 0 0 0-3.2-5.3"/>',
+  chip:'<rect x="7" y="7" width="10" height="10" rx="1.6"/><rect x="10" y="10" width="4" height="4" rx=".6"/><path d="M4 10h3M4 14h3M17 10h3M17 14h3M10 4v3M14 4v3M10 17v3M14 17v3"/>'
+};
+
+const DEPTS = [
+  {name:"Gestão", tier:"gestao", icon:"briefcase", roles:[
+    {role:"Gerente de Operações", hard:["Gestão e administração","Comercial"], soft:["Liderança","Tomada de decisão"]}
+  ]},
+
+  {name:"Engenharia e Projetos", tier:"tecnica", icon:"ruler", roles:[
+    {role:"Engenheiro(a) Eletricista", hard:["Projetos","Eletricidade"], soft:["Pensamento crítico","Resolução de problemas"]},
+    {role:"Técnico(a) de Projetos", hard:["Projetos","Tecnologias digitais"], soft:["Organização","Atenção aos detalhes"]}
+  ]},
+  {name:"Obras / EPC", tier:"tecnica", icon:"helmet", roles:[
+    {role:"Supervisor(a) de Obras", hard:["Segurança","Gestão e administração"], soft:["Liderança","Tomada de decisão"]},
+    {role:"Eletricista Fotovoltaico(a)", hard:["Eletricidade","Energia fotovoltaica"], soft:["Disciplina","Cuidado com a segurança"]},
+    {role:"Ajudante de Eletricista", hard:["Eletricidade","Segurança"], soft:["Trabalho em equipe","Zelo"]}
+  ]},
+  {name:"Operação e Manutenção", tier:"tecnica", icon:"wrench", roles:[
+    {role:"Técnico(a) de O&M", hard:["Manutenção","Instrumentação"], soft:["Atenção aos detalhes","Autonomia"]}
+  ]},
+  {name:"Centro de Operações", tier:"tecnica", icon:"monitor", roles:[
+    {role:"Analista de Monitoramento", hard:["Tecnologias digitais","Instrumentação"], soft:["Proatividade","Comunicação assertiva"]}
+  ]},
+  {name:"Comercial e Atendimento", tier:"tecnica", icon:"speech", roles:[
+    {role:"Consultor(a) Comercial", hard:["Comercial","Energia fotovoltaica"], soft:["Escuta ativa","Orientação para o cliente"]}
+  ]},
+  {name:"Segurança do Trabalho", tier:"tecnica", icon:"shield", roles:[
+    {role:"Técnico(a) de Segurança", hard:["Segurança","Eletricidade"], soft:["Cuidado com a segurança","Disciplina"]}
+  ]},
+
+  {name:"Suprimentos e Logística", tier:"apoio", icon:"boxes", roles:[
+    {role:"Almoxarife", hard:["Gestão e administração"], soft:["Organização","Zelo"]},
+    {role:"Analista de Logística", hard:["Gestão e administração"], soft:["Organização","Adaptabilidade"]}
+  ]},
+  {name:"Administrativo e Financeiro", tier:"apoio", icon:"coins", roles:[
+    {role:"Assistente Administrativo(a)", hard:["Gestão e administração"], soft:["Responsabilidade","Organização"]}
+  ]},
+  {name:"Relações Humanas (RH)", tier:"apoio", icon:"users", roles:[
+    {role:"Analista de RH", hard:["Gestão e administração"], soft:["Escuta ativa","Inteligência emocional"]}
+  ]},
+  {name:"TI e Comunicação", tier:"apoio", icon:"chip", roles:[
+    {role:"Profissional de TI", hard:["Tecnologias digitais"], soft:["Resolução de problemas","Proatividade"]}
+  ]}
+];
+
+const TIERS = [
+  {key:"gestao",  label:"Gestão", desc:"Lidera e coordena toda a empresa"},
+  {key:"tecnica", label:"Áreas técnicas e de negócio", desc:"Fazem o produto e o serviço chegarem ao cliente"},
+  {key:"apoio",   label:"Áreas de apoio", desc:"Sustentam a empresa nos bastidores"}
+];
+
+const svg = p => `<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+const plural = n => n===1 ? "1 profissão" : n+" profissões";
+
+const tiersEl = document.getElementById("tiers");
+TIERS.forEach(t=>{
+  const items = DEPTS.filter(d=>d.tier===t.key);
+  const sec = document.createElement("section");
+  sec.className = "tier "+t.key;
+  sec.innerHTML = `<div class="tier-h"><span class="bar"></span>
+      <div><h2>${t.label}</h2><p>${t.desc}</p></div></div>
+    <div class="grid${items.length===1?' one':''}"></div>`;
+  const grid = sec.querySelector(".grid");
+  items.forEach(d=>{
+    const i = DEPTS.indexOf(d);
+    const b = document.createElement("button");
+    b.className = "tile "+d.tier;
+    b.setAttribute("aria-label", d.name+" — "+plural(d.roles.length));
+    b.innerHTML = `<span class="chip">${svg(ICON[d.icon])}</span>
+      <span class="tt"><span class="nm">${d.name}</span>
+      <span class="ct">${plural(d.roles.length)} <span class="arrow">→</span></span></span>`;
+    b.addEventListener("click", ()=>openDept(i));
+    grid.appendChild(b);
+  });
+  tiersEl.appendChild(sec);
+});
+
+const ov = document.getElementById("ov");
+const modal = document.getElementById("modal");
+let lastFocus = null;
+
+function chipRow(cls, lab, arr){
+  return `<div class="skrow"><span class="sklab ${cls}">${lab}</span>
+    <span class="chips">${arr.map(s=>`<span class="sk ${cls}">${s}</span>`).join("")}</span></div>`;
+}
+function openDept(i){
+  const d = DEPTS[i];
+  lastFocus = document.activeElement;
+  modal.innerHTML =
+    `<div class="mhead ${d.tier}">
+       <span class="chip">${svg(ICON[d.icon])}</span>
+       <span class="mt"><span class="k">Área da empresa</span>
+         <h3 id="mttl">${d.name}</h3></span>
+       <button class="mclose" aria-label="Fechar">&times;</button>
+     </div>
+     <div class="mbody">${d.roles.map(r=>
+       `<div class="role"><p class="rn">${r.role}</p>
+         <div class="skset">
+           ${chipRow('h','Hard', r.hard)}
+           ${chipRow('s','Soft', r.soft)}
+         </div></div>`).join("")}</div>`;
+  ov.classList.add("open");
+  modal.querySelector(".mclose").addEventListener("click", closeDept);
+  ov.focus();
+}
+function closeDept(){
+  ov.classList.remove("open");
+  if(lastFocus) lastFocus.focus();
+}
+ov.addEventListener("click", e=>{ if(e.target===ov) closeDept(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) closeDept(); });
+</script>
+</body>
+</html>
